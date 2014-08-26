@@ -24,7 +24,7 @@ public class CircleShield extends CustomEffect {
 			}
 			l.setY(startLoc.getY()); //Setze Y wieder zu der des Kopfes
 			water = !water; //Drehe water Variable um
-			factor = factor + (1D / 60D); //Addiere 1/60 hinzu (60 Reihen von Drops um den Spieler herum)
+			factor = factor + (1D / 60D); //Addiere 1/60 hinzu (61 Spalten von Drops um den Spieler herum)
 		}
 	}
 }
