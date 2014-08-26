@@ -22,4 +22,9 @@ public class Main extends JavaPlugin {
         this.getLogger().info("Stopped plugin successfully.");
 	}
 
+	public static Main instance()
+	{
+		return instance;
+	}
+	
 }
