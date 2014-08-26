@@ -1,4 +1,4 @@
-package com.github.ForumDevGroup.JungleBattle;
+package com.github.ForumDevGroup.JungleBattle.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
