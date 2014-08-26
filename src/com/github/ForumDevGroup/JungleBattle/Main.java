@@ -41,10 +41,15 @@ public class Main extends JavaPlugin {
         this.getLogger().info("Stopped plugin successfully.");
 	}
 
-    // Die in der onEnable() Methode erstellte Instanz wird ausgegeben
+    // Funktion mit der die in der onEnable() Methode erstellte MySQL Instanz ausgegeben wird
 	public static Main instance() {
 		return instance;
 	}
+
+    // Funktion mit der die in der onEnable() Methode erstellte MySQL Instanz ausgegeben wird
+    public static MySQL getMySQL() {
+        return mySQL;
+    }
 
     // Funktion zum laden einer neuen MySQL Instanz
     private MySQL loadDBConnFromCfg() throws SQLException {
