@@ -1,0 +1,6 @@
+name: JungleBattle
+version: 0.1 DEV
+main: com.github.ForumDevGroup.JungleBattle.Main
+authors: [sheigutn, cn0, HerrDosHD, Maxthat, DerDr4g0n, SoccerwolfJB]
+website: http://GitHub.com/ForumDevGroup
+commands:
