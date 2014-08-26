@@ -1,6 +1,7 @@
 package com.github.ForumDevGroup.JungleBattle;
 
 import com.github.ForumDevGroup.JungleBattle.util.MySQL;
+import com.github.ForumDevGroup.JungleBattle.util.Registerer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,6 +24,8 @@ public class Main extends JavaPlugin {
         // Default Config wird geladen
         this.saveDefaultConfig();
         this.getLogger().info("Loaded default config.");
+        // Listeners laden
+        Registerer.registerListener("com.github.ForumDevGroup.JungleBattle.listeners");
         // Neue Instanz von MySQL wird erstellt
         try {
             mySQL = loadDBConnFromCfg();
