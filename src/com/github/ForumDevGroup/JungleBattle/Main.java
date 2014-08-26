@@ -22,8 +22,8 @@ public class Main extends JavaPlugin {
         this.getLogger().info("Stopped plugin successfully.");
 	}
 
-	public static Main instance()
-	{
+    // Die in der onEnable() Methode erstellte Instanz wird ausgegeben
+	public static Main instance() {
 		return instance;
 	}
 	

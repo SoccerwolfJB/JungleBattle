@@ -13,12 +13,9 @@ public class MySQL {
 	private final Connection c;
 	private final String url;
 
-	public MySQL(String host, String database, String user, String password)
-			throws SQLException {
-		this.url = ("jdbc:mysql://" + host + "/" + database + "?user=" + user
-				+ "&password=" + password + "&autoReconnect=true");
+	public MySQL(String host, String database, String user, String password) throws SQLException {
+		this.url = ("jdbc:mysql://" + host + "/" + database + "?user=" + user + "&password=" + password + "&autoReconnect=true");
 		this.c = DriverManager.getConnection(this.url);
-
 		initDriver("com.mysql.jdbc.Driver");
 	}
 
