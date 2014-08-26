@@ -14,6 +14,7 @@ public class LanguageAdapter extends PacketAdapter {
 	@Override
 	public void onPacketReceiving(PacketEvent event) {
 		String language = event.getPacket().getStrings().read(0);
+		//do some really heavy shit with it
 	}
 
 }
