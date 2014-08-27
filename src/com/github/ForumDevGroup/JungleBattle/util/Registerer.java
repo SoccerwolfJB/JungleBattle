@@ -80,11 +80,7 @@ public class Registerer {
         ArrayList<Class<?>> list = new ArrayList<Class<?>>();
         try {
             for (ClassPath.ClassInfo classInfo : ClassPath.from(Main.instance().getClass().getClassLoader()).getAllClasses()) {
-                //System.out.println(classInfo.getPackageName())
-                if(classInfo.getPackageName().toLowerCase().startsWith("com.github")) System.out.println(classInfo.getPackageName());
-                //System.out.println(classInfo.getPackageName().toLowerCase().equals(packageName.toLowerCase()));
                 if(classInfo.getPackageName().equals(packageName)) {
-                    System.out.print("Equals: " + classInfo.getName());
                     list.add(classInfo.load());
                 }
             }
