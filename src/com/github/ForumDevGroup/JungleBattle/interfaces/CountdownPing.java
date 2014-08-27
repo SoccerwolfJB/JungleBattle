@@ -1,7 +1,7 @@
 package com.github.ForumDevGroup.JungleBattle.interfaces;
 
-public abstract class CountdownPing {
+public interface CountdownPing {
 
-    public void ping(int time) {}
+    public void ping(int time);
 
 }
