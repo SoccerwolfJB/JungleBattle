@@ -34,9 +34,9 @@ public class Main extends JavaPlugin {
         // Neue Instanz von MySQL wird erstellt
         try {
             mySQL = loadDBConnFromCfg();
-            this.getLogger().info("Connected to database.");
+            this.getLogger().info("Successfully connected to the database.");
         } catch(SQLException e) {
-            this.getLogger().warning("Could not connect to database.");
+            this.getLogger().warning("Could not connect to the database. Are the connection-informations in the config correct?");
             e.printStackTrace();
         }
         this.getLogger().info("Loaded plugin successfully.");
