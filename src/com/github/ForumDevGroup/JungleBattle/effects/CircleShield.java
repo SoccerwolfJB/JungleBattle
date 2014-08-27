@@ -4,7 +4,7 @@ import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class CircleShield extends CustomEffect {
+public class CircleShield extends CustomPlayerEffect {
 	@Override
 	public void runEffect(Player p) {
 		Location l = p.getEyeLocation().clone(); // Klone EyeLocation des

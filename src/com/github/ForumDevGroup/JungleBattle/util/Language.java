@@ -77,7 +77,7 @@ public enum Language {
 	private String longn;
 	private HashMap<String, String> translations = new HashMap<String, String>();
 	private final static HashMap<String, Language> BY_NAME = new HashMap<String, Language>();
-
+	private static final Language STANDARD = GERMAN;
 	// private final static HashMap<String, Language> BY_ENUM_NAME = new
 	// HashMap<String, Language>();
 
@@ -118,8 +118,8 @@ public enum Language {
 		}
 	}
 
-	public int getPercentCompleted() {
-		return (int) (translations.size() / GERMAN.getTranslations().size() * 100);
+	public double getPercentCompleted() {
+		return ((int)((translations.size() / STANDARD.getTranslations().size()) * 10000)) / 100;
 	}
 
 	public static boolean isSupported(String shortn) {
@@ -136,7 +136,7 @@ public enum Language {
 
 	public String getTranslation(String name) {
 		String translation = translations.get(name);
-		if (this == GERMAN && translation == null) {
+		if (this == STANDARD && translation == null) {
 			try {
 				Main.getMySQL()
 						.query("INSERT INTO Languages VALUES('" + shortn
@@ -147,8 +147,8 @@ public enum Language {
 			}
 		}
 		if (translation == null
-				&& !this.getShortName().equals(GERMAN.getShortName())) {
-			return GERMAN.getTranslation(name);
+				&& !this.getShortName().equals(STANDARD.getShortName())) {
+			return STANDARD.getTranslation(name);
 		}
 		return translation;
 	}

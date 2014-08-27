@@ -1,7 +1,9 @@
 package com.github.ForumDevGroup.JungleBattle;
 
+import com.github.ForumDevGroup.JungleBattle.util.Language;
 import com.github.ForumDevGroup.JungleBattle.util.MySQL;
 import com.github.ForumDevGroup.JungleBattle.util.Registerer;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,6 +30,7 @@ public class Main extends JavaPlugin {
         Registerer.registerListener("com.github.ForumDevGroup.JungleBattle.listeners");
         Registerer.registerAdapters("com.github.ForumDevGroup.JungleBattle.network");
         Registerer.registerCommands("com.github.ForumDevGroup.JungleBattle.commands");
+        Language.initTranslations();
         // Neue Instanz von MySQL wird erstellt
         try {
             mySQL = loadDBConnFromCfg();
