@@ -2,7 +2,6 @@ package com.github.ForumDevGroup.JungleBattle;
 
 import com.github.ForumDevGroup.JungleBattle.util.MySQL;
 import com.github.ForumDevGroup.JungleBattle.util.Registerer;
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
