@@ -72,8 +72,9 @@ public class Map {
         return this.authors;
     }
 
-    public static Map getMapByName(String name)
-    {
+    // Gibt die Map mit dem Namen name zurück
+    // ACHTUNG: Map muss in der HashMap sein! - Nicht bevor nicht ein Konstruktor der Map name erstellt wurde aufrufen
+    public static Map getMapByName(String name) {
        return mapsMap.get(name);
     }
 
