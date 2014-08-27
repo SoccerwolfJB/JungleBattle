@@ -1,5 +1,6 @@
 package com.github.ForumDevGroup.JungleBattle;
 
+import com.github.ForumDevGroup.JungleBattle.handlers.GameHandler;
 import com.github.ForumDevGroup.JungleBattle.util.MySQL;
 import com.github.ForumDevGroup.JungleBattle.util.Registerer;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -34,6 +35,7 @@ public class Main extends JavaPlugin {
             this.getLogger().warning("Could not connect to the database. Are the connection-informations in the config correct?");
             e.printStackTrace();
         }
+        // GameHandler.loadLobbyMap();
         this.getLogger().info("Loaded plugin successfully.");
 	}
 
