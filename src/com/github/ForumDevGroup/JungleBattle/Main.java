@@ -27,10 +27,10 @@ public class Main extends JavaPlugin {
         this.saveDefaultConfig();
         this.getLogger().info("Loaded default config.");
         // Listeners laden
-        Registerer.registerListener("com.github.ForumDevGroup.JungleBattle.listeners");
+        Registerer.registerListeners("com.github.ForumDevGroup.JungleBattle.listeners");
         Registerer.registerAdapters("com.github.ForumDevGroup.JungleBattle.network");
         Registerer.registerCommands("com.github.ForumDevGroup.JungleBattle.commands");
-        Language.initTranslations();
+        //Language.initTranslations();
         // Neue Instanz von MySQL wird erstellt
         try {
             mySQL = loadDBConnFromCfg();

@@ -1,28 +1,26 @@
 package com.github.ForumDevGroup.JungleBattle.util;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.github.ForumDevGroup.JungleBattle.Main;
 import net.minecraft.util.com.google.common.reflect.ClassPath;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.PacketAdapter;
-import com.github.ForumDevGroup.JungleBattle.Main;
+import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Registerer {
 
     // Alle Listener aus einem Package werden ausgefiltert und registriert
-    public static void registerListener(String packagePath) {
+    public static void registerListeners(String packagePath) {
         // Alle Klassen des Packages werden durchgegangen
         for (Class<?> cls : getClasses(packagePath)) {
             // Von jeder Klasse nochmals alle Interfaces
             for(Class<?> iface : cls.getInterfaces()) {
                 // Überprüfung ob der Name des Interfaces "Listener" ist
-                if (iface.getPackage().getName().equals("org.bukkit.event.Listener")) {
+                if (iface.getSimpleName().equals("Listener")) {
                     try {
                         // Neue Instanz des gefundenen Listeners wird erstellt
                         Listener listener = (Listener) cls.newInstance();
@@ -45,7 +43,7 @@ public class Registerer {
                 // Alle Interfaces der Klasse werden durchgegangen
                 for (Class<?> iface : cls.getInterfaces()) {
                     // Überprüfung ob der Name des Interfaces "CommandExecutor" ist
-                    if (iface.getName().equalsIgnoreCase("CommandExecutor")) {
+                    if (iface.getSimpleName().equalsIgnoreCase("CommandExecutor")) {
                         try {
                             // Neue Instanz des gefundenen CommandExecutors wird erstellt
                             CommandExecutor executor = (CommandExecutor) cls.newInstance();
@@ -63,8 +61,8 @@ public class Registerer {
     // Alle Adapter aus einem Package werden rausgefiltert und zum als PacketListener zum ProtocolManager geaddet
     public static void registerAdapters(String packagePath) {
         for (Class<?> cls : getClasses(packagePath)) {
-            if (cls.getName().toLowerCase().endsWith("adapter")) {
-                if (cls.getSuperclass().getName().equalsIgnoreCase("PacketAdapter")) {
+            if (cls.getSimpleName().toLowerCase().endsWith("adapter")) {
+                if (cls.getSuperclass().getSimpleName().equalsIgnoreCase("PacketAdapter")) {
                     try {
                         PacketAdapter adapter = (PacketAdapter) cls.newInstance();
                         ProtocolLibrary.getProtocolManager().addPacketListener(adapter);
@@ -79,11 +77,13 @@ public class Registerer {
 
     // Alle Klassen aus einem Package werden eingelesen und in einer Liste abgespeichert
     private static List<Class<?>> getClasses(String packageName) {
-        packageName = packageName + ".";
         ArrayList<Class<?>> list = new ArrayList<Class<?>>();
         try {
-            for (ClassPath.ClassInfo classInfo : ClassPath.from(ClassLoader.getSystemClassLoader()).getAllClasses()) {
-                if(classInfo.getName().toLowerCase().startsWith(packageName)) {
+            for (ClassPath.ClassInfo classInfo : ClassPath.from(Main.instance().getClass().getClassLoader()).getAllClasses()) {
+                //System.out.println(classInfo.getPackageName())
+                if(classInfo.getPackageName().toLowerCase().startsWith("com.github")) System.out.println(classInfo.getPackageName());
+                //System.out.println(classInfo.getPackageName().toLowerCase().equals(packageName.toLowerCase()));
+                if(classInfo.getPackageName().equals(packageName)) {
                     System.out.print("Equals: " + classInfo.getName());
                     list.add(classInfo.load());
                 }

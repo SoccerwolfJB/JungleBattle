@@ -1,10 +1,10 @@
 package com.github.ForumDevGroup.JungleBattle.util;
 
+import com.github.ForumDevGroup.JungleBattle.Main;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-
-import com.github.ForumDevGroup.JungleBattle.Main;
 
 public enum Language {
 	AFRIKAANS("af_ZA", "Afrikaans (ZA)"),
