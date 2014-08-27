@@ -43,7 +43,7 @@ public class MySQL {
 		return this.c;
 	}
 
-	public void closeConnection(){
+	public void closeConnection() {
 		try {
 			c.close();
 		} catch (Exception e) {
