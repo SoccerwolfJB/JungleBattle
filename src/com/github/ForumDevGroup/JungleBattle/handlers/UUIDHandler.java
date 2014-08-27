@@ -14,7 +14,7 @@ public class UUIDHandler {
             Main.getMySQL().update("CREATE TABLE IF NOT EXISTS uuids (id INTEGER AUTO_INCREMENT REFERENCES junglebattlestats(id), uuid CHAR(36), name VARCHAR(16), PRIMARY KEY id (id))");
         } catch(Exception e) {}
     }
-
+    
     // Gibt wieder ob der Spieler player bereits gelistet ist
     private static boolean isListed(Player player) {
         try {
