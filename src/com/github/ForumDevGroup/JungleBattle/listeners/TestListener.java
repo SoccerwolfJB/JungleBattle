@@ -8,7 +8,7 @@ public class TestListener implements Listener {
 
     @EventHandler
     public void onEvent(PlayerJoinEvent event) {
-        event.setJoinMessage("a player joined");
+        event.setJoinMessage(event.getPlayer.getName() + " hat das Spiel betreten und wird es jetzt wieder verlassen... VERPISS DICH!");
     }
 
 }
