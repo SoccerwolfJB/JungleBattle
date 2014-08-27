@@ -1,5 +1,7 @@
 package com.github.ForumDevGroup.JungleBattle.util;
 
+import java.sql.*;
+
 public class MySQL {
 
 	private final Connection c;
