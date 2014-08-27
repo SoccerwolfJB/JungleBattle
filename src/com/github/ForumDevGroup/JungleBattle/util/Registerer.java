@@ -22,7 +22,7 @@ public class Registerer {
             // Von jeder Klasse nochmals alle Interfaces
             for(Class<?> iface : cls.getInterfaces()) {
                 // Überprüfung ob der Name des Interfaces "Listener" ist
-                if (iface.getName().toLowerCase().equalsIgnoreCase("listener")) {
+                if (iface.getPackage().getName().equals("org.bukkit.event.Listener")) {
                     try {
                         // Neue Instanz des gefundenen Listeners wird erstellt
                         Listener listener = (Listener) cls.newInstance();
@@ -45,7 +45,7 @@ public class Registerer {
                 // Alle Interfaces der Klasse werden durchgegangen
                 for (Class<?> iface : cls.getInterfaces()) {
                     // Überprüfung ob der Name des Interfaces "CommandExecutor" ist
-                    if (iface.getName().toLowerCase().equalsIgnoreCase("commandexecutor")) {
+                    if (iface.getName().equalsIgnoreCase("CommandExecutor")) {
                         try {
                             // Neue Instanz des gefundenen CommandExecutors wird erstellt
                             CommandExecutor executor = (CommandExecutor) cls.newInstance();
@@ -79,10 +79,14 @@ public class Registerer {
 
     // Alle Klassen aus einem Package werden eingelesen und in einer Liste abgespeichert
     private static List<Class<?>> getClasses(String packageName) {
+        packageName = packageName + ".";
         ArrayList<Class<?>> list = new ArrayList<Class<?>>();
         try {
-            for (ClassPath.ClassInfo classInfo : ClassPath.from(ClassLoader.getSystemClassLoader()).getTopLevelClasses(packageName)) {
-                list.add(Class.forName(classInfo.getName()));
+            for (ClassPath.ClassInfo classInfo : ClassPath.from(ClassLoader.getSystemClassLoader()).getAllClasses()) {
+                if(classInfo.getName().toLowerCase().startsWith(packageName)) {
+                    System.out.print("Equals: " + classInfo.getName());
+                    list.add(classInfo.load());
+                }
             }
         } catch(Exception e) {
             e.printStackTrace();

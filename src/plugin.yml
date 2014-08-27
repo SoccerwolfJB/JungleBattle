@@ -4,3 +4,6 @@ main: com.github.ForumDevGroup.JungleBattle.Main
 authors: [Sheigutn, cn0, HerrDosHD, Maxthat, DerDr4g0n, SoccerwolfJB]
 website: http://github.com/ForumDevGroup
 commands:
+     test:
+          description: made for tests
+          usage: /test

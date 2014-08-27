@@ -39,7 +39,6 @@ public class Main extends JavaPlugin {
             this.getLogger().warning("Could not connect to database.");
             e.printStackTrace();
         }
-        // Missing comment??
         this.getLogger().info("Loaded plugin successfully.");
 	}
 
