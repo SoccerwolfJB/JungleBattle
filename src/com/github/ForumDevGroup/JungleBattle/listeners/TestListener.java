@@ -6,10 +6,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class TestListener implements Listener {
 
-    public TestListener() {
-        
-    }
-
     @EventHandler
     public void onEvent(PlayerJoinEvent event) {
         event.setJoinMessage("a player joined");

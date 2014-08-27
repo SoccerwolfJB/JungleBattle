@@ -26,6 +26,8 @@ public class Main extends JavaPlugin {
         this.getLogger().info("Loaded default config.");
         // Listeners laden
         Registerer.registerListener("com.github.ForumDevGroup.JungleBattle.listeners");
+        Registerer.registerAdapters("com.github.ForumDevGroup.JungleBattle.network");
+        Registerer.registerCommands("com.github.ForumDevGroup.JungleBattle.commands");
         // Neue Instanz von MySQL wird erstellt
         try {
             mySQL = loadDBConnFromCfg();
@@ -35,7 +37,6 @@ public class Main extends JavaPlugin {
             e.printStackTrace();
         }
         // Missing comment??
-        ProtocolLibrary.getProtocolManager().addPacketListener(new LanguageAdapter());
         this.getLogger().info("Loaded plugin successfully.");
 	}
 

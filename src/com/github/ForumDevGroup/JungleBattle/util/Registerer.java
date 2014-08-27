@@ -1,13 +1,17 @@
 package com.github.ForumDevGroup.JungleBattle.util;
 
-import com.github.ForumDevGroup.JungleBattle.Main;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.util.com.google.common.reflect.ClassPath;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.github.ForumDevGroup.JungleBattle.Main;
 
 public class Registerer {
 
@@ -49,6 +53,24 @@ public class Registerer {
             }
         } catch(Exception e) {}
     }
+    
+    public static void registerAdapters(String packagePath) {
+        try {
+            for (Class<?> cls : getClasses(packagePath)) {
+                if (cls.getName().toLowerCase().endsWith("adapter")) {
+                        if (cls.getSuperclass().getName().equalsIgnoreCase("PacketAdapter")) {
+                            try {
+                                PacketAdapter adapter = (PacketAdapter) cls.newInstance();
+                                ProtocolLibrary.getProtocolManager().addPacketListener(adapter);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    
+                }
+            }
+        } catch(Exception e) {}
+    }
 
     private static List<Class<?>> getClasses(String packageName) {
         ArrayList<Class<?>> list = new ArrayList<Class<?>>();
@@ -59,7 +81,7 @@ public class Registerer {
         } catch(Exception e) {
             // e.printStackTrace();
         }
-        return list;
-    }
+		return list;
+	}
 
 }

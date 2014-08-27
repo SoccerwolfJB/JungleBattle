@@ -43,4 +43,12 @@ public class MySQL {
 		return this.c;
 	}
 
+	public void closeConnection(){
+		try {
+			c.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
