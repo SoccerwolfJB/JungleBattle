@@ -38,7 +38,7 @@ public class Registerer {
         // Alle Klassen des Packages werden durchgegangen
         for (Class<?> cls : getClasses(packagePath)) {
             // Es wird überprüft ob der Name der Klasse mit "Command" anfängt
-            if (cls.getName().toLowerCase().startsWith("command")) {
+            if (cls.getSimpleName().toLowerCase().startsWith("command")) {
                 // Alle Interfaces der Klasse werden durchgegangen
                 for (Class<?> iface : cls.getInterfaces()) {
                     // Überprüfung ob der Name des Interfaces "CommandExecutor" ist
@@ -48,6 +48,7 @@ public class Registerer {
                             CommandExecutor executor = (CommandExecutor) cls.newInstance();
                             // Und dann für den gefundenen Command als Executor gesetzt
                             Main.instance().getCommand(cls.getSimpleName().toLowerCase().replace("command", "").toLowerCase()).setExecutor(executor);
+                            System.out.print("Command: " + cls.getSimpleName().toLowerCase().replace("command", "").toLowerCase());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
