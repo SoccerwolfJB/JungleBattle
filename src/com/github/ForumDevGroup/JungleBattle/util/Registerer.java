@@ -15,63 +15,69 @@ import com.github.ForumDevGroup.JungleBattle.Main;
 
 public class Registerer {
 
-    /*
-     * Kommentare folgen.. :)
-     */
+    // Alle Listener aus einem Package werden ausgefiltert und registriert
     public static void registerListener(String packagePath) {
-        try {
-            for (Class<?> cls : getClasses(packagePath)) {
-                for(Class<?> iface : cls.getInterfaces()) {
-                    if (iface.getName().toLowerCase().contains("listener")) {
+        // Alle Klassen des Packages werden durchgegangen
+        for (Class<?> cls : getClasses(packagePath)) {
+            // Von jeder Klasse nochmals alle Interfaces
+            for(Class<?> iface : cls.getInterfaces()) {
+                // Überprüfung ob der Name des Interfaces "Listener" ist
+                if (iface.getName().toLowerCase().equalsIgnoreCase("listener")) {
+                    try {
+                        // Neue Instanz des gefundenen Listeners wird erstellt
+                        Listener listener = (Listener) cls.newInstance();
+                        // Und diese dann registriert
+                        Bukkit.getPluginManager().registerEvents(listener, Main.instance());
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    // Alle Comamnds aus einem Package werden ausgefiltert und registriert
+    public static void registerCommands(String packagePath) {
+        // Alle Klassen des Packages werden durchgegangen
+        for (Class<?> cls : getClasses(packagePath)) {
+            // Es wird überprüft ob der Name der Klasse mit "Command" anfängt
+            if (cls.getName().toLowerCase().startsWith("command")) {
+                // Alle Interfaces der Klasse werden durchgegangen
+                for (Class<?> iface : cls.getInterfaces()) {
+                    // Überprüfung ob der Name des Interfaces "CommandExecutor" ist
+                    if (iface.getName().toLowerCase().equalsIgnoreCase("commandexecutor")) {
                         try {
-                            Listener listener = (Listener) cls.newInstance();
-                            Bukkit.getPluginManager().registerEvents(listener, Main.instance());
-                        } catch(Exception e) {
+                            // Neue Instanz des gefundenen CommandExecutors wird erstellt
+                            CommandExecutor executor = (CommandExecutor) cls.newInstance();
+                            // Und dann für den gefundenen Command als Executor gesetzt
+                            Main.instance().getCommand(cls.getName().toLowerCase().replace("command", "").toLowerCase()).setExecutor(executor);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }
             }
-        } catch(Exception e) {}
+        }
     }
 
-    public static void registerCommands(String packagePath) {
-        try {
-            for (Class<?> cls : getClasses(packagePath)) {
-                if (cls.getName().toLowerCase().startsWith("command")) {
-                    for (Class<?> iface : cls.getInterfaces()) {
-                        if (iface.isInterface() && iface.getName().equalsIgnoreCase("CommandExecutor")) {
-                            try {
-                                CommandExecutor executor = (CommandExecutor) cls.newInstance();
-                                Main.instance().getCommand(cls.getName().toLowerCase().replace("command", "").toLowerCase()).setExecutor(executor);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
+    // Alle Adapter aus einem Package werden rausgefiltert und zum als PacketListener zum ProtocolManager geaddet
+    public static void registerAdapters(String packagePath) {
+        for (Class<?> cls : getClasses(packagePath)) {
+            if (cls.getName().toLowerCase().endsWith("adapter")) {
+                if (cls.getSuperclass().getName().equalsIgnoreCase("PacketAdapter")) {
+                    try {
+                        PacketAdapter adapter = (PacketAdapter) cls.newInstance();
+                        ProtocolLibrary.getProtocolManager().addPacketListener(adapter);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
+
             }
-        } catch(Exception e) {}
-    }
-    
-    public static void registerAdapters(String packagePath) {
-        try {
-            for (Class<?> cls : getClasses(packagePath)) {
-                if (cls.getName().toLowerCase().endsWith("adapter")) {
-                        if (cls.getSuperclass().getName().equalsIgnoreCase("PacketAdapter")) {
-                            try {
-                                PacketAdapter adapter = (PacketAdapter) cls.newInstance();
-                                ProtocolLibrary.getProtocolManager().addPacketListener(adapter);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    
-                }
-            }
-        } catch(Exception e) {}
+        }
     }
 
+    // Alle Klassen aus einem Package werden eingelesen und in einer Liste abgespeichert
     private static List<Class<?>> getClasses(String packageName) {
         ArrayList<Class<?>> list = new ArrayList<Class<?>>();
         try {
@@ -79,7 +85,7 @@ public class Registerer {
                 list.add(Class.forName(classInfo.getName()));
             }
         } catch(Exception e) {
-            // e.printStackTrace();
+            e.printStackTrace();
         }
 		return list;
 	}
