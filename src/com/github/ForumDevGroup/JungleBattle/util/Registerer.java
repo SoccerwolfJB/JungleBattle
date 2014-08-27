@@ -7,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class Registerer {
                             // Neue Instanz des gefundenen CommandExecutors wird erstellt
                             CommandExecutor executor = (CommandExecutor) cls.newInstance();
                             // Und dann für den gefundenen Command als Executor gesetzt
-                            Main.instance().getCommand(cls.getName().toLowerCase().replace("command", "").toLowerCase()).setExecutor(executor);
+                            Main.instance().getCommand(cls.getSimpleName().toLowerCase().replace("command", "").toLowerCase()).setExecutor(executor);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
