@@ -16,6 +16,8 @@ public class MapHandler {
      * Diese müssen im Nachhinein mit .loadMap() geladen werden.
      */
 
+    private static Random random = new Random();
+
     // Lediglich der Filenamefilter um zB die Lobby-Map oder Systemdateien auszufiltern
     private static FilenameFilter filter = new FilenameFilter() {
         @Override
@@ -29,7 +31,7 @@ public class MapHandler {
     // Gibt eine zufällige Map aus dem "Maps" Ordner des Servers aus
     public static Map getRandomMap() {
         File[] files = new File("maps").listFiles(filter);
-        int mapI = new Random().nextInt(files.length);
+        int mapI = random.nextInt(files.length);
         return new Map(files[mapI].getName(), false);
     }
 
@@ -42,7 +44,7 @@ public class MapHandler {
     public static List<Map> getVoteMaps(int count) {
         File[] files = new File("maps").listFiles(filter);
         ArrayList<Map> list = new ArrayList<Map>();
-        int i = new Random().nextInt(files.length - (count - 1));
+        int i = random.nextInt(files.length - (count - 1));
         while(i < count) {
             list.add(new Map(files[i].getName(), false));
             i++;

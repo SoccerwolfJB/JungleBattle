@@ -3,6 +3,8 @@ package com.github.ForumDevGroup.JungleBattle.util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+
 public class Util {
 
     // Alle Spieler werden ausgegeben - Verursacht beim compilen aber keine Fehlermeldungen :3
@@ -13,9 +15,7 @@ public class Util {
 
     // Hier bald mal die Languages einbauen :3
     public static void bcast(String message) {
-        for(Player player : getPlayers()) {
-            player.sendMessage(message);
-        }
+        Arrays.asList(getPlayers()).forEach((Player player) -> player.sendMessage(message));
     }
 
 }

@@ -11,6 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Map {
 
@@ -69,6 +70,11 @@ public class Map {
     // Gibt die Mapersteller zurück
     public List<String> getAuthors() {
         return this.authors;
+    }
+
+    public static Map getMapByName(String name)
+    {
+       return mapsMap.get(name);
     }
 
 }
