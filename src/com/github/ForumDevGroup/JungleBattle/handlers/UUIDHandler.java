@@ -11,10 +11,10 @@ public class UUIDHandler {
     // Erstellt die Tabelle
     private static void createTableIfNotExists() {
         try {
-            Main.getMySQL().update("CREATE TABLE IF NOT EXISTS uuids (id INTEGER AUTO_INCREMENT REFERENCES junglebattlestats(id), uuid CHAR(36), name VARCHAR(16), PRIMARY KEY id (id))");
+            Main.getMySQL().update("CREATE TABLE IF NOT EXISTS uuids (uuid CHAR(36), name VARCHAR(16), PRIMARY KEY uuid (uuid))");
         } catch(Exception e) {}
     }
-    
+
     // Gibt wieder ob der Spieler player bereits gelistet ist
     private static boolean isListed(Player player) {
         try {
