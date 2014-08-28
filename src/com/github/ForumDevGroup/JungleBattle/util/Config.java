@@ -33,7 +33,7 @@ public class Config {
         if(entrys == null)
             return;
         Stream<String> entrysS = entrys.stream();
-        entrysS.filter(s -> (cfg.get(s) != null) && (cfg.getConfigurationSection(s) == null)).forEach(setting.put(s, cfg.get(s)));
+        entrysS.filter(s -> (cfg.get(s) != null) && (cfg.getConfigurationSection(s) == null)).forEach(s -> setting.put(s, cfg.get(s)));
         entrysS.forEach(s -> initSettings(cfg, s));
     }
 
