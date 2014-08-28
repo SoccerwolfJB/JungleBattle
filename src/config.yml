@@ -1,3 +1,6 @@
+lobbymap: "lobby"
+players:
+  startgame: 8
 db:
   host:
   dbname:

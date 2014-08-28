@@ -1,6 +1,7 @@
 package com.github.ForumDevGroup.JungleBattle;
 
 import com.github.ForumDevGroup.JungleBattle.handlers.GameHandler;
+import com.github.ForumDevGroup.JungleBattle.util.Config;
 import com.github.ForumDevGroup.JungleBattle.util.MySQL;
 import com.github.ForumDevGroup.JungleBattle.util.Registerer;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -22,6 +23,9 @@ public class Main extends JavaPlugin {
         // Default Config wird geladen
         this.saveDefaultConfig();
         this.getLogger().info("Loaded default config.");
+        // Einstellungen der Default Config werden in die Settings der Config Klasse geladen
+        Config.initSettings();
+        this.getLogger().info("Saved default config settings.");
         // Listeners laden
         Registerer.registerListeners("com.github.ForumDevGroup.JungleBattle.listeners");
         Registerer.registerCommands("com.github.ForumDevGroup.JungleBattle.commands");
@@ -35,6 +39,7 @@ public class Main extends JavaPlugin {
             this.getLogger().warning("Could not connect to the database. Are the connection-informations in the config correct?");
             e.printStackTrace();
         }
+        // Lädt die Lobby-Map für das Spiel
         // GameHandler.loadLobbyMap();
         this.getLogger().info("Loaded plugin successfully.");
 	}
