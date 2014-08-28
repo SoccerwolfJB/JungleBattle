@@ -11,7 +11,7 @@ public class UUIDHandler {
     // Erstellt die Tabelle
     private static void createTableIfNotExists() {
         try {
-            Main.getMySQL().update("CREATE TABLE IF NOT EXISTS uuids (uuid CHAR(36), name VARCHAR(16), PRIMARY KEY uuid (uuid))");
+            Main.getMySQL().update("CREATE TABLE IF NOT EXISTS uuids (id INTEGER AUTO_INCREMENT, uuid CHAR(36), name VARCHAR(16), PRIMARY KEY (id))");
         } catch(Exception e) {}
     }
 
