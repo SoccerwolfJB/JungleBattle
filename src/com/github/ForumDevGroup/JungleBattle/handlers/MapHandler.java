@@ -23,13 +23,10 @@ public class MapHandler {
     private static Random random = new Random();
 
     // Lediglich der Filenamefilter um zB die Lobby-Map oder Systemdateien auszufiltern
-    private static FilenameFilter filter = new FilenameFilter() {
-        @Override
-        public boolean accept(File dir, String name) {
+    private static FilenameFilter filter = (dir, name) ->{
             if(name.startsWith(".") || name.equalsIgnoreCase("lobby"))
                 return false;
             return true;
-        }
     };
 
     // Gibt eine zufällige Map aus dem "Maps" Ordner des Servers aus

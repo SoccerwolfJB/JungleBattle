@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashMap;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class Config {
 
@@ -28,13 +29,12 @@ public class Config {
 
     // Liest Settings einer Config aus und speichert sie mit ihrem Pfad in eine HashMap
     public static void initSettings(FileConfiguration cfg, String defaullt) {
-        if(getEntrys(defaullt) == null)
+        Set<String> entrys = getEntrys(defaullt);
+        if(entrys == null)
             return;
-        for(String s : getEntrys(defaullt)) {
-            if((cfg.get(s) != null) && (cfg.getConfigurationSection(s) == null))
-                setting.put(s, cfg.get(s));
-            initSettings(cfg, s);
-        }
+        Stream<String> entrysS = entrys.stream();
+        entrysS.filter(s -> (cfg.get(s) != null) && (cfg.getConfigurationSection(s) == null)).forEach(setting.put(s, cfg.get(s)));
+        entrysS.forEach(s -> initSettings(cfg, s));
     }
 
     // Gibt die HashMap der Settings aus
