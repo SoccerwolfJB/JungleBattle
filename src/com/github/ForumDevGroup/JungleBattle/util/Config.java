@@ -30,11 +30,13 @@ public class Config {
     // Liest Settings einer Config aus und speichert sie mit ihrem Pfad in eine HashMap
     public static void initSettings(FileConfiguration cfg, String defaullt) {
         Set<String> entrys = getEntrys(defaullt);
-        if(entrys == null)
+        if (entrys == null)
             return;
         Stream<String> entrysS = entrys.stream();
-        entrysS.filter(s -> (cfg.get(s) != null) && (cfg.getConfigurationSection(s) == null)).forEach(s -> setting.put(s, cfg.get(s)));
-        entrysS.forEach(s -> initSettings(cfg, s));
+        entrysS.forEach(s -> {
+            if ((cfg.get(s) != null) && (cfg.getConfigurationSection(s) == null)) setting.put(s, cfg.get(s));
+            initSettings(cfg, s);
+        });
     }
 
     // Gibt die HashMap der Settings aus
