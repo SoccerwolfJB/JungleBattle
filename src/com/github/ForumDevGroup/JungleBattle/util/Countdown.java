@@ -14,7 +14,7 @@ public class Countdown implements Runnable {
     // Normaler Konstruktor
     public Countdown(String name, int time, String bcast, CountdownPing ping, int[] bcasttimes) {
         this.name = name;
-        this.timer = time;
+        this.timer = time + 1;
         this.bcast = bcast;
         this.ping = ping;
         this.bcasttimes = bcasttimes;

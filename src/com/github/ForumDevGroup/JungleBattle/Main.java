@@ -63,10 +63,10 @@ public class Main extends JavaPlugin {
     private MySQL loadDBConnFromCfg() throws SQLException {
         FileConfiguration cfg = this.getConfig();
         return new MySQL(
-                cfg.getString("db.host"),
-                cfg.getString("db.dbname"),
-                cfg.getString("db.username"),
-                cfg.getString("db.password")
+                (String) Config.getSettings().get("db.host"),
+                (String) Config.getSettings().get("db.dbname"),
+                (String) Config.getSettings().get("db.username"),
+                (String) Config.getSettings().get("db.password")
         );
     }
 

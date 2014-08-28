@@ -18,6 +18,7 @@ public class Map {
     private World world;
     private String name;
     private List<String> authors;
+    private boolean randomgen;
 
     public static HashMap<String, Map> mapsMap = new HashMap<String, Map>();
 
@@ -28,12 +29,14 @@ public class Map {
 
     // Konstruktor: Wenn creation == true: Welt wird geladen :3
     public Map(String name, boolean creation) {
+        this.randomgen = false;
         this.name = name;
         if(creation)
             this.loadWorld();
         // Attribute werden geladen
         File file = new File("maps" + File.separatorChar + name, "config.yml");
         FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+        authors = cfg.getStringList("authors");
         Main.instance().getLogger().info("Loaded the attributes of Map \"" + name + "\" from config.");
         mapsMap.put(name.toLowerCase(), this);
         if(creation) Main.instance().getLogger().info("Loaded Map \"" + name + "\"");

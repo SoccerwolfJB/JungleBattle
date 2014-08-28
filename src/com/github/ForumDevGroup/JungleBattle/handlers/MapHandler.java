@@ -1,6 +1,10 @@
 package com.github.ForumDevGroup.JungleBattle.handlers;
 
 import com.github.ForumDevGroup.JungleBattle.util.Map;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 
 import java.io.File;
 import java.io.FilenameFilter;
